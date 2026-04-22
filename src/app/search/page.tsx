@@ -72,11 +72,12 @@ export default async function SearchPage({
 
   return (
     <PageShell
+      variant="listing"
       title="Search"
       description={
         query
-          ? `Results for "${query}"`
-          : "Browse the latest posts across every task."
+          ? `Results for “${query}” in the catalog`
+          : "Search listings and posts across every task and category—same forest-and-mint layout as the home page."
       }
       actions={
         <form action="/search" className="flex w-full gap-2 sm:w-auto">
@@ -84,15 +85,15 @@ export default async function SearchPage({
           {category ? <input type="hidden" name="category" value={category} /> : null}
           {task ? <input type="hidden" name="task" value={task} /> : null}
           <div className="relative w-full sm:w-80">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#2d4a42]/70" />
             <Input
               name="q"
               defaultValue={query}
-              placeholder="Search across tasks..."
-              className="h-11 pl-9"
+              placeholder="Search listings, titles, tags…"
+              className="h-11 border-[#c5e0d8] bg-white pl-9 focus-visible:ring-[#66C2B2]"
             />
           </div>
-          <Button type="submit" className="h-11">
+          <Button type="submit" className="h-11 bg-[#66C2B2] text-white hover:bg-[#52b39f]">
             Search
           </Button>
         </form>
@@ -107,8 +108,11 @@ export default async function SearchPage({
           })}
         </div>
       ) : (
-        <div className="rounded-2xl border border-dashed border-border p-10 text-center text-muted-foreground">
-          No matching posts yet.
+        <div className="rounded-2xl border border-dashed border-[#b8dfd4] bg-white p-10 text-center shadow-[0_12px_36px_rgba(1,50,32,0.06)]">
+          <p className="font-medium text-[#013220]">No matching listings or posts yet.</p>
+          <p className="mt-2 text-sm text-[#2d4a42]">
+            Try a shorter query, clear category filters, or browse from the home page to explore the full catalog.
+          </p>
         </div>
       )}
     </PageShell>

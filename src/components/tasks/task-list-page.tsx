@@ -26,7 +26,7 @@ const taskIcons: Record<TaskKey, any> = {
 
 const variantShells = {
   'listing-directory': 'bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.08),transparent_24%),linear-gradient(180deg,#f8fbff_0%,#ffffff_100%)]',
-  'listing-showcase': 'bg-[linear-gradient(180deg,#ffffff_0%,#f4f9ff_100%)]',
+  'listing-showcase': 'bg-[linear-gradient(180deg,#f0faf7_0%,#ffffff_55%,#f7faf8_100%)]',
   'article-editorial': 'bg-[radial-gradient(circle_at_top_left,rgba(251,191,36,0.08),transparent_20%),linear-gradient(180deg,#fff8ef_0%,#ffffff_100%)]',
   'article-journal': 'bg-[linear-gradient(180deg,#fffdf9_0%,#f7f1ea_100%)]',
   'image-masonry': 'bg-[linear-gradient(180deg,#09101d_0%,#111c2f_100%)] text-white',
@@ -77,13 +77,21 @@ export async function TaskListPage({ task, category }: { task: TaskKey; category
           input: 'border border-[#dbc6b6] bg-white text-[#2f1d16]',
           button: 'bg-[#2f1d16] text-[#fff4e4] hover:bg-[#452920]',
         }
-      : {
-          muted: 'text-slate-600',
-          panel: 'border border-slate-200 bg-white',
-          soft: 'border border-slate-200 bg-slate-50',
-          input: 'border border-slate-200 bg-white text-slate-950',
-          button: 'bg-slate-950 text-white hover:bg-slate-800',
-        }
+      : task === 'listing'
+        ? {
+            muted: 'text-[#2d4a42]',
+            panel: 'border border-[#b8dfd4] bg-white shadow-[0_20px_50px_rgba(1,50,32,0.08)]',
+            soft: 'border border-[#c5e0d8] bg-[#f0faf7]',
+            input: 'border border-[#8fc9bc] bg-white text-[#013220]',
+            button: 'bg-[#66C2B2] text-white hover:bg-[#52b39f]',
+          }
+        : {
+            muted: 'text-slate-600',
+            panel: 'border border-slate-200 bg-white',
+            soft: 'border border-slate-200 bg-slate-50',
+            input: 'border border-slate-200 bg-white text-slate-950',
+            button: 'bg-slate-950 text-white hover:bg-slate-800',
+          }
 
   return (
     <div className={`min-h-screen ${shellClass}`}>
@@ -122,26 +130,28 @@ export async function TaskListPage({ task, category }: { task: TaskKey; category
 
         {layoutKey === 'listing-directory' || layoutKey === 'listing-showcase' ? (
           <section className="mb-12 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-            <div className={`rounded-[2rem] p-7 shadow-[0_24px_70px_rgba(15,23,42,0.07)] ${ui.panel}`}>
-              <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.24em] opacity-70"><Icon className="h-4 w-4" /> {taskConfig?.label || task}</div>
-              <h1 className="mt-4 text-4xl font-semibold tracking-[-0.04em] text-foreground">{taskConfig?.description || 'Latest posts'}</h1>
-              <p className={`mt-4 max-w-2xl text-sm leading-7 ${ui.muted}`}>Built with a cleaner scan rhythm, stronger metadata grouping, and a structure designed for business discovery rather than editorial reading.</p>
+            <div className={`rounded-2xl p-7 ${ui.panel}`}>
+              <div className={`flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.24em] ${ui.muted}`}><Icon className="h-4 w-4" /> {taskConfig?.label || task}</div>
+              <h1 className="mt-4 text-4xl font-semibold tracking-[-0.04em] text-[#013220]">{taskConfig?.description || 'Latest posts'}</h1>
+              <p className={`mt-4 max-w-2xl text-sm leading-7 ${ui.muted}`}>
+                Product-style cards with a forest and mint palette: scan categories fast, then open a listing for full detail.
+              </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Link href={taskConfig?.route || '#'} className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold ${ui.button}`}>Explore results <ArrowRight className="h-4 w-4" /></Link>
-                <Link href="/search" className={`inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold ${ui.soft}`}>Open search</Link>
+                <Link href={taskConfig?.route || '#'} className={`inline-flex items-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold ${ui.button}`}>Browse grid <ArrowRight className="h-4 w-4" /></Link>
+                <Link href="/search" className={`inline-flex items-center gap-2 rounded-lg border border-[#66C2B2] bg-white px-5 py-3 text-sm font-semibold text-[#013220] hover:bg-[#e8f7f3]`}>Open search</Link>
               </div>
             </div>
-            <form className={`grid gap-3 rounded-[2rem] p-6 shadow-[0_18px_50px_rgba(15,23,42,0.06)] ${ui.soft}`} action={taskConfig?.route || '#'}>
+            <form className={`grid gap-3 rounded-2xl p-6 ${ui.soft}`} action={taskConfig?.route || '#'}>
               <div>
                 <label className={`text-xs uppercase tracking-[0.2em] ${ui.muted}`}>Category</label>
-                <select name="category" defaultValue={normalizedCategory} className={`mt-2 h-11 w-full rounded-xl px-3 text-sm ${ui.input}`}>
+                <select name="category" defaultValue={normalizedCategory} className={`mt-2 h-11 w-full rounded-lg px-3 text-sm ${ui.input}`}>
                   <option value="all">All categories</option>
                   {CATEGORY_OPTIONS.map((item) => (
                     <option key={item.slug} value={item.slug}>{item.name}</option>
                   ))}
                 </select>
               </div>
-              <button type="submit" className={`h-11 rounded-xl text-sm font-medium ${ui.button}`}>Apply filters</button>
+              <button type="submit" className={`h-11 rounded-lg text-sm font-medium ${ui.button}`}>Apply filters</button>
             </form>
           </section>
         ) : null}
