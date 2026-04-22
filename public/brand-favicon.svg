@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Mudatealaweb">
+  <defs>
+    <linearGradient id="g" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#0a1f3d"/>
+      <stop offset="0.45" stop-color="#1e4a8c"/>
+      <stop offset="1" stop-color="#2dd4bf"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="256" cy="420" rx="100" ry="24" fill="#7dd3fc" opacity="0.35"/>
+  <path
+    fill="url(#g)"
+    d="M256 64c-64 0-120 48-120 120 0 88 120 216 120 216s120-128 120-216c0-72-56-120-120-120z"
+  />
+  <g fill="#fff" transform="translate(176 140)">
+    <path d="M80 0L160 80H0z"/>
+    <rect x="20" y="100" width="30" height="30" rx="2"/>
+    <rect x="60" y="100" width="30" height="30" rx="2"/>
+    <rect x="20" y="140" width="30" height="30" rx="2"/>
+    <rect x="60" y="140" width="30" height="30" rx="2"/>
+    <rect x="32" y="180" width="55" height="50" rx="2"/>
+  </g>
+  <g fill="#99f6e4" opacity="0.95" transform="translate(320 96)">
+    <rect x="0" y="0" width="20" height="20" rx="2"/>
+    <rect x="28" y="-12" width="16" height="16" rx="2"/>
+    <rect x="50" y="-32" width="12" height="12" rx="2"/>
+  </g>
+</svg>

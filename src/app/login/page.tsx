@@ -1,22 +1,22 @@
-import Link from 'next/link'
-import { Bookmark, Building2, FileText, Image as ImageIcon, Sparkles } from 'lucide-react'
+import { Bookmark, Building2, FileText, Image as ImageIcon } from 'lucide-react'
 import { NavbarShell } from '@/components/shared/navbar-shell'
 import { Footer } from '@/components/shared/footer'
 import { getFactoryState } from '@/design/factory/get-factory-state'
 import { getProductKind } from '@/design/factory/get-product-kind'
 import { LOGIN_PAGE_OVERRIDE_ENABLED, LoginPageOverride } from '@/overrides/login-page'
+import { LoginForm } from '@/components/auth/login-form'
 
 function getLoginConfig(kind: ReturnType<typeof getProductKind>) {
   if (kind === 'directory') {
     return {
-      shell: 'bg-[#f8fbff] text-slate-950',
-      panel: 'border border-slate-200 bg-white',
-      side: 'border border-slate-200 bg-slate-50',
-      muted: 'text-slate-600',
-      action: 'bg-slate-950 text-white hover:bg-slate-800',
+      shell: 'bg-[#f7faf8] text-[#013220]',
+      panel: 'border border-[#b8dfd4] bg-white shadow-[0_20px_50px_rgba(1,50,32,0.08)]',
+      side: 'border border-[#8fc9bc]/50 bg-[#e8f7f3] shadow-[0_8px_30px_rgba(1,50,32,0.06)]',
+      muted: 'text-[#2d4a42]',
+      action: 'bg-[#66C2B2] text-white hover:bg-[#52b39f]',
       icon: Building2,
-      title: 'Access your business dashboard',
-      body: 'Manage listings, verification details, contact info, and local discovery surfaces from one place.',
+      title: 'Sign in to manage your listings',
+      body: 'Post new listings, update contact details, and keep your public profile consistent — all in one place.',
     }
   }
   if (kind === 'editorial') {
@@ -64,6 +64,14 @@ export default function LoginPage() {
   const productKind = getProductKind(recipe)
   const config = getLoginConfig(productKind)
   const Icon = config.icon
+  const sideBullets =
+    productKind === 'directory'
+      ? [
+          'Photo-first listing cards that read like a trusted catalog',
+          'Search and categories built for quick scanning',
+          'Session remembered on this device for easy return visits',
+        ]
+      : ['Cleaner product-specific workflows', 'Palette and layout matched to the site family', 'Fewer repeated admin patterns']
 
   return (
     <div className={`min-h-screen ${config.shell}`}>
@@ -74,27 +82,33 @@ export default function LoginPage() {
             <Icon className="h-8 w-8" />
             <h1 className="mt-5 text-4xl font-semibold tracking-[-0.05em]">{config.title}</h1>
             <p className={`mt-5 text-sm leading-8 ${config.muted}`}>{config.body}</p>
-            <div className="mt-8 grid gap-4">
-              {['Cleaner product-specific workflows', 'Palette and layout matched to the site family', 'Fewer repeated admin patterns'].map((item) => (
-                <div key={item} className="rounded-[1.5rem] border border-current/10 px-4 py-4 text-sm">{item}</div>
+            <div className="mt-8 grid gap-3">
+              {sideBullets.map((item) => (
+                <div
+                  key={item}
+                  className={`flex items-start gap-3 rounded-xl border border-current/10 px-4 py-3 text-sm ${
+                    productKind === 'directory' ? 'bg-white/60' : ''
+                  }`}
+                >
+                  {productKind === 'directory' ? (
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#66C2B2] text-xs font-bold text-white">
+                      ✓
+                    </span>
+                  ) : null}
+                  <span>{item}</span>
+                </div>
               ))}
             </div>
           </div>
 
-          <div className={`rounded-[2rem] p-8 ${config.panel}`}>
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] opacity-70">Welcome back</p>
-            <form className="mt-6 grid gap-4">
-              <input className="h-12 rounded-xl border border-current/10 bg-transparent px-4 text-sm" placeholder="Email address" />
-              <input className="h-12 rounded-xl border border-current/10 bg-transparent px-4 text-sm" placeholder="Password" type="password" />
-              <button type="submit" className={`inline-flex h-12 items-center justify-center rounded-full px-6 text-sm font-semibold ${config.action}`}>Sign in</button>
-            </form>
-            <div className={`mt-6 flex items-center justify-between text-sm ${config.muted}`}>
-              <Link href="/forgot-password" className="hover:underline">Forgot password?</Link>
-              <Link href="/register" className="inline-flex items-center gap-2 font-semibold hover:underline">
-                <Sparkles className="h-4 w-4" />
-                Create account
-              </Link>
-            </div>
+          <div className={`rounded-2xl p-8 ${config.panel}`}>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#2d4a42]/80">Welcome back</p>
+            <p className={`mt-1 text-sm ${config.muted}`}>Your session is saved on this device after you sign in.</p>
+            <LoginForm
+              className="mt-6 grid gap-0"
+              actionClassName={config.action}
+              mutedClassName={config.muted}
+            />
           </div>
         </section>
       </main>

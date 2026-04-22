@@ -2,24 +2,27 @@ import type { TaskKey } from '@/lib/site-config'
 
 export const siteContent = {
   navbar: {
-    tagline: 'Listing platform',
+    /** Short line under the site name */
+    tagline: 'Search & browse local listings',
+    /** Compact badge next to the name (listing-site positioning) */
+    brandTag: 'Listings & directory',
   },
   footer: {
-    tagline: 'Listing platform',
+    tagline: 'Listings, services & local offers',
   },
   hero: {
-    badge: 'Latest stories and visuals',
-    title: ['A thoughtful home for', 'stories, visuals, and discovery.'],
-    description: 'A Listing site for Mudatealaweb, built for clean discovery and structured publishing.',
+    badge: 'Listing catalog',
+    title: ['A calm home for', 'searchable, photo-first listings.'],
+    description: 'Find services and offers in a forest-and-mint layout that reads like a modern product catalog.',
     primaryCta: {
       label: 'Browse listings',
       href: '/listings',
     },
     secondaryCta: {
-      label: 'Explore visuals',
-      href: '/images',
+      label: 'Search',
+      href: '/search',
     },
-    searchPlaceholder: 'Search stories, visuals, listings, and more',
+    searchPlaceholder: 'Search listings, categories, or keywords',
     focusLabel: 'Focus',
     featureCardBadge: 'latest cover rotation',
     featureCardTitle: 'Latest posts shape the visual identity of the homepage.',
@@ -28,12 +31,11 @@ export const siteContent = {
   },
   home: {
     metadata: {
-      title: 'Stories, visuals, and discoverable content',
-      description: 'A Listing site for Mudatealaweb, built for clean discovery and structured publishing.',
-      openGraphTitle: 'Stories, visuals, and discoverable content',
-      openGraphDescription:
-        'Discover articles, visual posts, and connected content through a calmer reading-first experience.',
-      keywords: ['story platform', 'article site', 'visual content', 'content discovery'],
+      title: 'Listings and local catalog',
+      description: 'Browse photo-first listing cards, categories, and clear trust cues in a clean forest and mint layout.',
+      openGraphTitle: 'Listings and local catalog',
+      openGraphDescription: 'Search and filter listings with a product-tile experience built for quick scanning.',
+      keywords: ['listings', 'catalog', 'local directory', 'search listings'],
     },
     introBadge: 'About the platform',
     introTitle: 'Built for reading, browsing, and connecting different kinds of content.',
@@ -50,12 +52,12 @@ export const siteContent = {
       'Lightweight interactions that keep the experience fast and readable.',
     ],
     primaryLink: {
-      label: 'Browse articles',
-      href: '/articles',
+      label: 'Browse listings',
+      href: '/listings',
     },
     secondaryLink: {
-      label: 'See visuals',
-      href: '/images',
+      label: 'Open search',
+      href: '/search',
     },
   },
   cta: {
@@ -113,14 +115,14 @@ export const taskIntroCopy: Record<
   listing: {
     title: 'Listings, services, and structured pages',
     paragraphs: [
-      'Explore listings, services, brands, and discoverable pages across categories. Each entry is organized to make browsing clearer and help visitors quickly understand what a post offers.',
-      'Listings connect naturally with articles, images, resources, and other content types so supporting information stays easy to reach from the same platform.',
-      'Browse by category to compare posts in context, discover related content, and move between formats without losing your place.',
+      'Explore photo-led listing cards with categories, locations, and short trust cues so visitors can compare at a glance.',
+      'The grid is tuned for scanning: bold titles, large imagery, and mint-accent actions for the next step.',
+      'Filter by category to narrow results, then open a listing for full contact details and description.',
     ],
     links: [
-      { label: 'Read articles', href: '/articles' },
-      { label: 'Explore classifieds', href: '/classifieds' },
-      { label: 'View profiles', href: '/profile' },
+      { label: 'Home', href: '/' },
+      { label: 'Search', href: '/search' },
+      { label: 'Help', href: '/help' },
     ],
   },
   article: {
