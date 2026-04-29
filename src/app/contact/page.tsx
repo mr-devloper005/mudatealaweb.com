@@ -1,4 +1,4 @@
-import Link from "next/link"
+﻿import Link from "next/link"
 import { Building2, Mail, MapPin, Phone } from "lucide-react"
 import { PageShell, listingCardClass } from "@/components/shared/page-shell"
 import { Card, CardContent } from "@/components/ui/card"
@@ -32,22 +32,23 @@ const topics = [
   },
 ]
 
-const direct = [
-  { icon: Mail, label: "Email", value: `hello@${SITE_CONFIG.domain}` },
-  { icon: Phone, label: "Phone", value: "+1 (555) 000-0000" },
-  { icon: MapPin, label: "Office", value: "Remote-first · worldwide" },
-]
-
 export default function ContactPage() {
   if (CONTACT_PAGE_OVERRIDE_ENABLED) {
     return <ContactPageOverride />
   }
 
+  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || `hello@${SITE_CONFIG.domain}`
+  const direct = [
+    { icon: Mail, label: "Email", value: contactEmail, href: `mailto:${contactEmail}` },
+    { icon: Phone, label: "Phone", value: "+1 (555) 000-0000" },
+    { icon: MapPin, label: "Office", value: "Remote-first · worldwide" },
+  ]
+
   return (
     <PageShell
       variant="listing"
       title="Contact us"
-      description={`Questions about listings, partnerships, or coverage? Tell us what you need—we route every message to the right lane for ${SITE_CONFIG.name}.`}
+      description={`Questions about listings, partnerships, or coverage? Tell us what you need-we route every message to the right lane for ${SITE_CONFIG.name}.`}
       actions={
         <>
           <Button
@@ -73,7 +74,7 @@ export default function ContactPage() {
             <h2 className="text-2xl font-semibold text-[#013220]">A real team behind the listing catalog</h2>
             <p className="text-sm text-[#2d4a42]">
               Whether you are listing a business, growing in a new area, or fixing a detail on your page, we will point you
-              to the right next step—no generic queue.
+              to the right next step-no generic queue.
             </p>
             <div className="grid gap-4 sm:grid-cols-3">
               {highlights.map((item) => (
@@ -109,7 +110,7 @@ export default function ContactPage() {
             <Badge className="border-[#b8dfd4] bg-[#e8f7f3] text-[#013220]">Send a message</Badge>
             <h2 className="mt-3 text-xl font-semibold text-[#013220]">We will respond with a clear next step</h2>
             <p className="mt-2 text-sm text-[#2d4a42]">
-              Include your listing URL or business name if you already publish with us—it speeds things up.
+              Include your listing URL or business name if you already publish with us-it speeds things up.
             </p>
             <form className="mt-6 grid gap-4" action="#" method="post">
               <div className="grid gap-2">
@@ -139,7 +140,7 @@ export default function ContactPage() {
                 <Input
                   id="contact-subject"
                   name="subject"
-                  placeholder="e.g. Listing update, new category…"
+                  placeholder="e.g. Listing update, new category..."
                   className="h-11 border-[#c5e0d8] bg-white focus-visible:ring-[#66C2B2]"
                 />
               </div>
@@ -171,7 +172,13 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wide text-[#2d4a42]">{row.label}</p>
-                  <p className="mt-1 text-sm font-medium text-[#013220]">{row.value}</p>
+                  {row.href ? (
+                    <a href={row.href} className="mt-1 text-sm font-medium text-[#013220] underline">
+                      {row.value}
+                    </a>
+                  ) : (
+                    <p className="mt-1 text-sm font-medium text-[#013220]">{row.value}</p>
+                  )}
                 </div>
               </CardContent>
             </Card>

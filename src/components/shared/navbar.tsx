@@ -119,18 +119,7 @@ export function Navbar() {
                 <img src="/favicon.png?v=20260422" alt={`${SITE_CONFIG.name} logo`} width="64" height="64" className="h-full w-full object-contain" />
               </div>
               <div className="min-w-0 hidden sm:block">
-                <div className="flex flex-wrap items-baseline gap-2">
-                  <span className="truncate text-xl font-semibold leading-tight">{SITE_CONFIG.name}</span>
-                  <span
-                    className="inline-flex shrink-0 items-center rounded-full border border-[#66C2B2]/45 bg-[#66C2B2]/12 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#a8e8dc]"
-                    title="Site focus"
-                  >
-                    {siteContent.navbar.brandTag}
-                  </span>
-                </div>
-                <span className="mt-0.5 block text-[10px] uppercase tracking-[0.22em] text-white/55">
-                  {siteContent.navbar.tagline}
-                </span>
+                <span className="block truncate text-xl font-semibold leading-tight">{SITE_CONFIG.name}</span>
               </div>
             </Link>
 
