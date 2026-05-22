@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo, useCallback, useTransition } from 'react'
+import { Suspense, useState, useEffect, useMemo, useCallback, useTransition } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { PageShell } from "@/components/shared/page-shell";
 import { Input } from "@/components/ui/input";
@@ -31,7 +31,7 @@ function useDebounce<T>(value: T, delay: number): T {
   return debouncedValue;
 }
 
-export default function SearchPage() {
+function SearchClient() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -191,5 +191,14 @@ export default function SearchPage() {
         </div>
       )}
     </PageShell>
+  );
+}
+
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={null}>
+      <SearchClient />
+    </Suspense>
   );
 }
