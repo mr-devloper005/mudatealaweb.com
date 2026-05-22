@@ -8,6 +8,8 @@ import { getMockPostsForTask } from "@/lib/mock-posts";
 import { SITE_CONFIG } from "@/lib/site-config";
 import { TaskPostCard } from "@/components/shared/task-post-card";
 
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 export const revalidate = 3;
 
 const matchText = (value: string, query: string) =>
